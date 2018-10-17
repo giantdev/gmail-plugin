@@ -95,17 +95,24 @@ function locationHashChanged() {
 }
 window.onload = function() {
 	if ( location.href.indexOf("ui=2&view=cm") != -1) {
-		if (document.querySelectorAll('.xr .editable').length > 0) {
-			document.querySelector('.xr .editable').addEventListener('blur', function(e) {
-				dealBlur(e);
-			});
+		var body = document.querySelector('body');
+		var observer = new MutationObserver(function (mutations) {
+		    mutations.forEach(function (mutation) {
+		       if (document.querySelectorAll('.xr .editable').length > 0) {
+					document.querySelector('.xr .editable').addEventListener('blur', function(e) {
+						dealBlur(e);
+					});
 
-			document.querySelector('.xr .editable').addEventListener('keyup', function(e) {
-				if (e.which == 13 || e.which == 32) {
-	            	dealBlur(e);
-	            }
-			});
-		}
+					document.querySelector('.xr .editable').addEventListener('keyup', function(e) {
+						if (e.which == 13 || e.which == 32) {
+			            	dealBlur(e);
+			            }
+					});
+					observer.disconnect();
+				}
+		    });
+		});
+		observer.observe(body, {attributes: true, childList: true});
 	}
 }
 
