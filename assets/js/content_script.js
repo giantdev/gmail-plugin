@@ -85,13 +85,28 @@ function initListeners() {
 }
 
 function locationHashChanged() {
-    if ( location.hash.indexOf("?compose=") != -1 ) {
+    if ( location.hash.indexOf("?compose=") != -1) {
         // console.log('composed');
         initListeners();
     } else {
     	// console.log('no composer');
     	colorAssigned = [];
     }
+}
+window.onload = function() {
+	if ( location.href.indexOf("ui=2&view=cm") != -1) {
+		if (document.querySelectorAll('.xr .editable').length > 0) {
+			document.querySelector('.xr .editable').addEventListener('blur', function(e) {
+				dealBlur(e);
+			});
+
+			document.querySelector('.xr .editable').addEventListener('keyup', function(e) {
+				if (e.which == 13 || e.which == 32) {
+	            	dealBlur(e);
+	            }
+			});
+		}
+	}
 }
 
 rangy.init();
