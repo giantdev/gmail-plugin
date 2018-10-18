@@ -44,7 +44,7 @@ function dealBlur(e) {
 
 		var j = i.substr(1);
 		if (colorAssigned[j] == undefined) {
-			colorAssigned[j] = colorList[Object.keys(colorAssigned).length % 8];
+			colorAssigned[j] = colorList[Object.keys(colorAssigned).length % 5];
 		}
 		
 		//Replace All
@@ -84,6 +84,25 @@ function initListeners() {
 	}
 }
 
+var body = document.querySelector('body');
+
+var observerReply = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+       if (document.querySelectorAll('.Bk .editable').length > 0) {
+			document.querySelector('.Bk .editable').addEventListener('blur', function(e) {
+				dealBlur(e);
+			});
+
+			document.querySelector('.Bk .editable').addEventListener('keyup', function(e) {
+				if (e.which == 13 || e.which == 32) {
+	            	dealBlur(e);
+	            }
+			});
+		}
+    });
+});
+observerReply.observe(body, {attributes: true, childList: true});
+
 function locationHashChanged() {
     if ( location.hash.indexOf("?compose=") != -1) {
         // console.log('composed');
@@ -95,7 +114,6 @@ function locationHashChanged() {
 }
 window.onload = function() {
 	if ( location.href.indexOf("ui=2&view=cm") != -1) {
-		var body = document.querySelector('body');
 		var observer = new MutationObserver(function (mutations) {
 		    mutations.forEach(function (mutation) {
 		       if (document.querySelectorAll('.xr .editable').length > 0) {
