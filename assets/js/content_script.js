@@ -1,6 +1,6 @@
 //////// Color Addition Feature ///////////
 
-var colorList = ['#ff0000', '#ff9900', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#9900ff', '#ff00ff'];
+var colorList = ['#0000FF', '#FF0000', '#009900', '#9900FF', '#FF9900'];
 var colorAssigned = [];
 var savedSel = null;
 var savedSelActiveElement = null;
