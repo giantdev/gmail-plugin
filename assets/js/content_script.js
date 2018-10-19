@@ -86,22 +86,25 @@ function initListeners() {
 
 var body = document.querySelector('body');
 
-var observerReply = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-       if (document.querySelectorAll('.Bk .editable').length > 0) {
-			document.querySelector('.Bk .editable').addEventListener('blur', function(e) {
-				dealBlur(e);
-			});
+document.addEventListener('click', function(ev) {
+	if (ev.target.className.indexOf("bkH") != -1 || ev.target.className.indexOf("bkI") != -1) {
+		setTimeout(
+			function() {
+				if (document.querySelectorAll('.Bk .editable').length > 0) {
+					document.querySelector('.Bk .editable').addEventListener('blur', function(e) {
+						dealBlur(e);
+					});
 
-			document.querySelector('.Bk .editable').addEventListener('keyup', function(e) {
-				if (e.which == 13 || e.which == 32) {
-	            	dealBlur(e);
-	            }
-			});
-		}
-    });
+					document.querySelector('.Bk .editable').addEventListener('keyup', function(e) {
+						if (e.which == 13 || e.which == 32) {
+				        	dealBlur(e);
+				        }
+					});
+				}
+			}, 100
+		);
+	}
 });
-observerReply.observe(body, {attributes: true, childList: true});
 
 function locationHashChanged() {
     if ( location.hash.indexOf("?compose=") != -1) {
