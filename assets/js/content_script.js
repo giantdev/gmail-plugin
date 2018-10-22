@@ -26,6 +26,37 @@ function restoreSelection() {
     }
 }
 
+// var bE = null;
+// var rp = null;
+
+// function saveRangePosition()
+// {
+//   	var range=window.getSelection().getRangeAt(0);
+//   	var sC=range.startContainer,eC=range.endContainer;
+
+//   	A=[];while(sC!==bE){A.push(getNodeIndex(sC));sC=sC.parentNode}
+//   	B=[];while(eC!==bE){B.push(getNodeIndex(eC));eC=eC.parentNode}
+
+//   	return {"sC":A,"sO":range.startOffset,"eC":B,"eO":range.endOffset};
+// }
+
+// function restoreRangePosition(rp)
+// {
+//   	bE.focus();
+//   	var sel=window.getSelection(),range=sel.getRangeAt(0);
+//   	var x,C,sC=bE,eC=bE;
+
+//   	C=rp.sC;x=C.length;while(x--)sC=sC.childNodes[C[x]];
+//   	C=rp.eC;x=C.length;while(x--)eC=eC.childNodes[C[x]];
+
+//   	range.setStart(sC,rp.sO);
+//   	range.setEnd(eC,rp.eO);
+//   	sel.removeAllRanges();
+//   	sel.addRange(range)
+// }
+
+// function getNodeIndex(n){var i=0;while(n=n.previousSibling)i++;return i}
+
 function dealBlur(e) {
 	saveSelection();
 	var html = e.target.innerHTML;
@@ -59,9 +90,9 @@ function dealBlur(e) {
 function initListeners() {
 	if (document.querySelectorAll('.dw .editable').length > 0) {
         for (var live_selector of document.querySelectorAll('.dw .editable')) {
-	        live_selector.addEventListener('blur', function (e) {
-	            dealBlur(e);
-	        });
+	        // live_selector.addEventListener('blur', function (e) {
+	        //     dealBlur(e);
+	        // });
 
 	        live_selector.addEventListener('keyup', function (e) {
 	        	if (e.which == 13 || e.which == 32) {
@@ -72,9 +103,9 @@ function initListeners() {
 	}
 
 	if (document.querySelectorAll('.aSt .editable').length > 0) {
-		document.querySelector('.aSt .editable').addEventListener('blur', function(e) {
-			dealBlur(e);
-		});
+		// document.querySelector('.aSt .editable').addEventListener('blur', function(e) {
+		// 	dealBlur(e);
+		// });
 
 		document.querySelector('.aSt .editable').addEventListener('keyup', function(e) {
 			if (e.which == 13 || e.which == 32) {
@@ -91,9 +122,22 @@ document.addEventListener('click', function(ev) {
 		setTimeout(
 			function() {
 				if (document.querySelectorAll('.Bk .editable').length > 0) {
-					document.querySelector('.Bk .editable').addEventListener('blur', function(e) {
-						dealBlur(e);
-					});
+					// document.querySelector('.Bk .editable').addEventListener('blur', function(e) {
+					// 	console.log('out');
+					// 	dealBlur(e);
+					// 	bE = document.querySelector('.Bk .editable');
+					// 	console.log(document.activeElement);
+					// 	rp = saveRangePosition();
+					// });
+
+					// document.querySelector('.Bk .editable').addEventListener('focusin', function(e) {
+					// 	console.log('in');
+					// 	if (bE != null && rp != null) {
+					// 		restoreRangePosition(rp);
+					// 		bE = null;
+					// 		rp = null;
+					// 	}
+					// });
 
 					document.querySelector('.Bk .editable').addEventListener('keyup', function(e) {
 						if (e.which == 13 || e.which == 32) {
@@ -120,9 +164,9 @@ window.onload = function() {
 		var observer = new MutationObserver(function (mutations) {
 		    mutations.forEach(function (mutation) {
 		       if (document.querySelectorAll('.xr .editable').length > 0) {
-					document.querySelector('.xr .editable').addEventListener('blur', function(e) {
-						dealBlur(e);
-					});
+					// document.querySelector('.xr .editable').addEventListener('blur', function(e) {
+					// 	dealBlur(e);
+					// });
 
 					document.querySelector('.xr .editable').addEventListener('keyup', function(e) {
 						if (e.which == 13 || e.which == 32) {
